@@ -26,7 +26,7 @@ export default function Sidebar() {
     >
       <Box sx={{ textAlign: "center", mb: 3 }}>
         <Avatar
-          src="/illustrated-profile.png"
+          src="/resume/illustrated-profile.png"
           alt={data.basics.firstName}
           sx={{
             width: 120,
