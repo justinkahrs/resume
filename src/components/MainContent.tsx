@@ -7,13 +7,21 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import data from "../app/data";
+import Button from "@mui/material/Button";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-export default function MainContent() {
+import { Download } from "@mui/icons-material";
+export default function MainContent({
+  generatePDF,
+  isMobile,
+}: {
+  generatePDF: () => void;
+  isMobile: boolean;
+}) {
   return (
     <Box
       component="main"
@@ -25,23 +33,25 @@ export default function MainContent() {
       }}
     >
       <Box sx={{ mb: 3 }}>
-        <Typography
-          variant="h3"
-          sx={{
-            fontWeight: "bold",
-            display: "inline",
-            color: "text.primary",
-            mr: 1,
-          }}
-        >
-          {data.basics.firstName}
-        </Typography>
-        <Typography
-          variant="h3"
-          sx={{ display: "inline", color: "text.primary" }}
-        >
-          {data.basics.lastName}
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: "bold",
+              display: "inline",
+              color: "text.primary",
+              mr: 1,
+            }}
+          >
+            {data.basics.firstName}
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ display: "inline", color: "text.primary" }}
+          >
+            {data.basics.lastName}
+          </Typography>
+        </Box>
         <Typography
           variant="subtitle1"
           sx={{ mt: 1, color: "text.secondary", letterSpacing: 1 }}
@@ -49,6 +59,24 @@ export default function MainContent() {
           {data.basics.label}
         </Typography>
       </Box>
+      {!isMobile && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            mb: 2,
+            "@media print": { display: "none" },
+          }}
+        >
+          <Button
+            startIcon={<Download />}
+            variant="contained"
+            onClick={generatePDF}
+          >
+            Save (PDF)
+          </Button>
+        </Box>
+      )}
       <Divider sx={{ mb: 3 }} />
       {/* PROFILE */}
       <Box sx={{ mb: 4 }}>

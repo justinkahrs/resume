@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
 import generatePDF from "react-to-pdf";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
@@ -9,7 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import { Info } from "@mui/icons-material";
+import { Download, Info } from "@mui/icons-material";
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
@@ -21,14 +20,11 @@ export default function Home() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const handleGeneratePDF = () => {
+    generatePDF(pdfRef, { filename: "resume.pdf" });
+  };
   return (
     <>
-      <Button
-        variant="contained"
-        onClick={() => generatePDF(pdfRef, { filename: "resume.pdf" })}
-      >
-        Download PDF
-      </Button>
       <Box
         ref={pdfRef}
         sx={{
@@ -42,6 +38,17 @@ export default function Home() {
       >
         {isMobile ? (
           <>
+            <IconButton
+              onClick={handleGeneratePDF}
+              sx={{
+                position: "fixed",
+                top: 16,
+                right: 48,
+                zIndex: theme.zIndex.drawer + 1,
+              }}
+            >
+              <Download sx={{ color: "text.primary" }} />
+            </IconButton>
             <IconButton
               onClick={handleDrawerToggle}
               sx={{
@@ -73,7 +80,7 @@ export default function Home() {
         ) : (
           <Sidebar />
         )}
-        <MainContent />
+        <MainContent generatePDF={handleGeneratePDF} isMobile={isMobile} />
       </Box>
     </>
   );
