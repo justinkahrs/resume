@@ -26,7 +26,7 @@ export default function Home() {
         maxWidth: "816px",
         aspectRatio: "8.5/11",
         margin: "auto",
-        height: "100%",
+        minHeight: "150vh",
       }}
     >
       {isMobile ? (
@@ -52,7 +52,7 @@ export default function Home() {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: 240,
-                height: "100%",
+                height: "100vh",
               },
             }}
           >
