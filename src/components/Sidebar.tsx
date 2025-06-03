@@ -38,7 +38,7 @@ export default function Sidebar() {
         }}
       >
         <Avatar
-          src="/resume/illustrated-profile.png"
+          src="/illustrated-profile.png"
           alt={data.basics.firstName}
           sx={{
             width: 120,
