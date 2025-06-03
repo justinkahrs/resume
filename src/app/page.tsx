@@ -11,7 +11,10 @@ import { Info } from "@mui/icons-material";
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"), {
+    noSsr: false,
+    defaultMatches: true,
+  });
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -23,7 +26,7 @@ export default function Home() {
         maxWidth: "816px",
         aspectRatio: "8.5/11",
         margin: "auto",
-        position: "relative",
+        height: "100%",
       }}
     >
       {isMobile ? (
@@ -43,10 +46,14 @@ export default function Home() {
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}
-            ModalProps={{ keepMounted: true }}
+            ModalProps={{ keepMounted: false }}
             sx={{
               display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: 240,
+                height: "100%",
+              },
             }}
           >
             <Sidebar />
