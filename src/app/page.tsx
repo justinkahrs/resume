@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import generatePDF from "react-to-pdf";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
@@ -15,54 +17,64 @@ export default function Home() {
     noSsr: false,
     defaultMatches: true,
   });
+  const pdfRef = useRef(null);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        maxWidth: "816px",
-        aspectRatio: "8.5/11",
-        margin: "auto",
-        minHeight: "150vh",
-      }}
-    >
-      {isMobile ? (
-        <>
-          <IconButton
-            onClick={handleDrawerToggle}
-            sx={{
-              position: "fixed",
-              top: 16,
-              right: 16,
-              zIndex: theme.zIndex.drawer + 1,
-            }}
-          >
-            <Info sx={{ color: "text.primary" }} />
-          </IconButton>
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{ keepMounted: false }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: 240,
-                height: "100vh",
-              },
-            }}
-          >
-            <Sidebar />
-          </Drawer>
-        </>
-      ) : (
-        <Sidebar />
-      )}
-      <MainContent />
-    </Box>
+    <>
+      <Button
+        variant="contained"
+        onClick={() => generatePDF(pdfRef, { filename: "resume.pdf" })}
+      >
+        Download PDF
+      </Button>
+      <Box
+        ref={pdfRef}
+        sx={{
+          display: "flex",
+          width: "100%",
+          maxWidth: "816px",
+          aspectRatio: "8.5/11",
+          margin: "auto",
+          minHeight: "150vh",
+        }}
+      >
+        {isMobile ? (
+          <>
+            <IconButton
+              onClick={handleDrawerToggle}
+              sx={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+                zIndex: theme.zIndex.drawer + 1,
+              }}
+            >
+              <Info sx={{ color: "text.primary" }} />
+            </IconButton>
+            <Drawer
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{ keepMounted: false }}
+              sx={{
+                display: { xs: "block", sm: "none" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: 240,
+                  height: "100vh",
+                },
+              }}
+            >
+              <Sidebar />
+            </Drawer>
+          </>
+        ) : (
+          <Sidebar />
+        )}
+        <MainContent />
+      </Box>
+    </>
   );
 }
