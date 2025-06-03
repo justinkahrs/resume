@@ -20,12 +20,23 @@ export default function Sidebar() {
         bgcolor: "primary.dark",
         color: "common.white",
         display: "flex",
+        // justifyContent: "center",
+        alignItems: "center",
         flexDirection: "column",
         p: 2,
         background: "linear-gradient(180deg, #333333 0%, #000000 100%)",
       }}
     >
-      <Box sx={{ textAlign: "center", mb: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          width: 120,
+          height: 120,
+          backgroundColor: "white",
+          mb: 5,
+          borderRadius: "100%",
+        }}
+      >
         <Avatar
           src="/resume/illustrated-profile.png"
           alt={data.basics.firstName}
@@ -44,6 +55,7 @@ export default function Sidebar() {
           mb: 1,
           color: "grey.300",
           fontSize: "0.9rem",
+          alignSelf: "flex-start",
         }}
       >
         CONTACT
@@ -95,6 +107,7 @@ export default function Sidebar() {
           mb: 1,
           color: "grey.300",
           fontSize: "0.9rem",
+          alignSelf: "flex-start",
         }}
       >
         EDUCATION
@@ -124,6 +137,7 @@ export default function Sidebar() {
           mb: 1,
           color: "grey.300",
           fontSize: "0.9rem",
+          alignSelf: "flex-start",
         }}
       >
         SKILLS
