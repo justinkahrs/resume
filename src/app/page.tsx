@@ -7,7 +7,6 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Info } from "@mui/icons-material";
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
