@@ -69,6 +69,7 @@ export default function MainContent({
           }}
         >
           <Button
+            data-html2canvas-ignore="true"
             startIcon={<Download />}
             variant="contained"
             onClick={generatePDF}
