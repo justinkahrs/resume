@@ -21,7 +21,7 @@ export default function Home() {
     setMobileOpen(!mobileOpen);
   };
   const handleGeneratePDF = () => {
-    generatePDF(pdfRef, { filename: "resume.pdf" });
+    generatePDF(pdfRef, { filename: "Justin_Kahrs_Resume.pdf" });
   };
   return (
     <>
