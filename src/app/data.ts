@@ -18,6 +18,7 @@ const data = {
   work: [
     {
       name: "o11n (software)",
+      link: "https://o11n.life",
       position: "Creator & Developer",
       startDate: "2025",
       endDate: "Present",
@@ -29,17 +30,21 @@ const data = {
       ],
     },
     {
-      name: "Ridecell – San Francisco, CA",
+      name: "Ridecell",
+      location: "San Francisco, CA",
+      link: "https://www.ridecell.com",
       position: "Senior Frontend Engineer (remote)",
       startDate: "2018",
       endDate: "2024",
       highlights: [
-        "Delivered and maintained many products ranging from fleet-management automation workflows to short-term rental booking applications",
         "Shipped next-generation shared-mobility solutions internationally for a Fortune Global 500 company",
+        "Delivered and maintained many products ranging from fleet-management automation workflows to short-term rental booking applications",
       ],
     },
     {
-      name: "Indiana University – Bloomington, IN",
+      name: "Indiana University",
+      location: "Bloomington, IN",
+      link: "https://www.iu.edu",
       position: "Senior Frontend Engineer",
       startDate: "2015",
       endDate: "2018",
@@ -50,7 +55,9 @@ const data = {
       ],
     },
     {
-      name: "Grand Valley State University – Allendale, MI",
+      name: "Grand Valley State University",
+      location: "Allendale, MI",
+      link: "https://www.gvsu.edu",
       position: "Server Support Technician",
       startDate: "2010",
       endDate: "2015",

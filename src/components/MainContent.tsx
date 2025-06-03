@@ -155,7 +155,16 @@ export default function MainContent() {
                     >
                       <Typography
                         variant="subtitle1"
-                        sx={{ fontWeight: "bold" }}
+                        component="a"
+                        href={job.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          fontWeight: "bold",
+                          color: "text.primary",
+                          textDecoration: "none",
+                          "&:hover": { textDecoration: "underline" },
+                        }}
                       >
                         {job.name}
                       </Typography>
@@ -166,12 +175,24 @@ export default function MainContent() {
                         {job.startDate} — {job.endDate}
                       </Typography>
                     </Box>
+
                     <Typography
                       variant="body2"
                       sx={{ mb: 1, color: "text.primary" }}
                     >
                       {job.position}
                     </Typography>
+                    {job.location && (
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "text.secondary",
+                          mb: 1,
+                        }}
+                      >
+                        {job.location}
+                      </Typography>
+                    )}
                     <List dense disablePadding>
                       {job.highlights.map((h) => (
                         <ListItem key={h} disableGutters sx={{ pl: 0 }}>
