@@ -16,6 +16,7 @@ export default function Sidebar() {
       component="aside"
       sx={{
         width: { xs: "100%", sm: 400 },
+        height: "100%",
         bgcolor: "primary.dark",
         color: "common.white",
         display: "flex",

@@ -76,22 +76,7 @@ const data = {
     { name: "DevOps", keywords: ["GitHub Actions"] },
   ],
 
-  references: [
-    {
-      name: "Bryan VanDyke",
-      company: "Credit Karma",
-      title: "Mobile Engineering Manager",
-      email: "bryan.vandyke@creditkarma.com",
-      phone: "+1 (231) 955-1798",
-    },
-    {
-      name: "Brent Scarafone",
-      company: "Codeductor",
-      title: "Founder",
-      email: "brent@codeductor.com",
-      phone: "+1 (423) 506-7816",
-    },
-  ],
+  references: [],
 };
 
 export default data;

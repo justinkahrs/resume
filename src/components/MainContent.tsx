@@ -4,9 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -19,9 +17,13 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
+import { useMediaQuery, useTheme } from "@mui/material";
 export default function MainContent() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [printMode, setPrintMode] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+
   const scrollRef = useRef<HTMLElement>(null);
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -98,8 +100,12 @@ export default function MainContent() {
         onScroll={handleScroll}
         sx={{
           mb: 4,
-          maxHeight: printMode ? "none" : "400px",
-          overflowY: printMode ? "none" : "scroll",
+          maxHeight: printMode
+            ? "none"
+            : isMobile
+            ? "none"
+            : "calc(100vh - 450px)",
+          overflowY: printMode ? "none" : isMobile ? "auto" : "scroll",
           position: "relative",
         }}
       >
@@ -199,65 +205,24 @@ export default function MainContent() {
           })}
         </Timeline>
 
-        <Box
-          sx={{
-            position: "sticky",
-            bottom: 8,
-            left: 0,
-            transformOrigin: "center",
-          }}
-        >
-          {!hasScrolled ? (
-            <KeyboardArrowDownIcon color="action" />
-          ) : (
-            <KeyboardArrowUpIcon color="action" />
-          )}
-        </Box>
+        {!isMobile && (
+          <Box
+            sx={{
+              position: "sticky",
+              bottom: 8,
+              left: 0,
+              transformOrigin: "center",
+            }}
+          >
+            {!hasScrolled ? (
+              <KeyboardArrowDownIcon color="action" />
+            ) : (
+              <KeyboardArrowUpIcon color="action" />
+            )}
+          </Box>
+        )}
       </Box>
       <Divider sx={{ mb: 4 }} />
-      {/* REFERENCES */}
-      <Box>
-        <Typography
-          variant="h6"
-          sx={{
-            letterSpacing: 1,
-            mb: 2,
-            color: "text.primary",
-            fontSize: "1rem",
-          }}
-        >
-          REFERENCE
-        </Typography>
-        <Grid container spacing={2}>
-          {data.references.map((ref) => (
-            <Grid key={ref.name}>
-              <Box sx={{ mb: 1 }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                  {ref.name}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ color: "text.secondary", fontStyle: "italic" }}
-                >
-                  {ref.company} / {ref.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Phone: {ref.phone}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Email:{" "}
-                  <Link
-                    href={`mailto:${ref.email}`}
-                    sx={{ color: "text.secondary" }}
-                  >
-                    {ref.email}
-                  </Link>
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
     </Box>
   );
 }
