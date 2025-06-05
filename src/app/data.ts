@@ -53,16 +53,7 @@ const data = {
         "HIPAA/FERPA-compliant practices",
         "Interfaced web-based applications with Tableau/Denodo for complex data analysis and retrieval",
       ],
-    },
-    {
-      name: "Grand Valley State University",
-      location: "Allendale, MI",
-      link: "https://www.gvsu.edu",
-      position: "Server Support Technician",
-      startDate: "2010",
-      endDate: "2015",
-      highlights: [],
-    },
+    }
   ],
 
   education: [
