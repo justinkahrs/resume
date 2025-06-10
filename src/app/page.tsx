@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import generatePDF from "react-to-pdf";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
 import { useTheme } from "@mui/material/styles";
@@ -24,64 +24,68 @@ export default function Home() {
     generatePDF(pdfRef, { filename: "Justin_Kahrs_Resume.pdf" });
   };
   return (
-    <>
-      <Box
-        ref={pdfRef}
-        sx={{
-          display: "flex",
-          width: "100%",
-          maxWidth: "816px",
-          aspectRatio: "8.5/11",
-          margin: "auto",
-          minHeight: "150vh",
-        }}
-      >
-        {isMobile ? (
-          <>
-            <IconButton
-              onClick={handleGeneratePDF}
-              sx={{
-                position: "fixed",
-                top: 16,
-                right: 48,
-                zIndex: theme.zIndex.drawer + 1,
-              }}
-            >
-              <Download sx={{ color: "text.primary" }} />
-            </IconButton>
-            <IconButton
-              onClick={handleDrawerToggle}
-              sx={{
-                position: "fixed",
-                top: 16,
-                right: 16,
-                zIndex: theme.zIndex.drawer + 1,
-              }}
-            >
-              <Info sx={{ color: "text.primary" }} />
-            </IconButton>
-            <Drawer
-              variant="temporary"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              ModalProps={{ keepMounted: false }}
-              sx={{
-                display: { xs: "block", sm: "none" },
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: 240,
-                  height: "100vh",
-                },
-              }}
-            >
-              <Sidebar />
-            </Drawer>
-          </>
-        ) : (
+    <Grid
+      container
+      display="flex"
+      ref={pdfRef}
+      sx={{
+        background: "linear-gradient(180deg, #333333 0%, #000000 100%)",
+        width: "100%",
+        maxWidth: "816px",
+        margin: "auto",
+      }}
+    >
+      {isMobile ? (
+        <>
+          <IconButton
+            onClick={handleGeneratePDF}
+            sx={{
+              position: "fixed",
+              top: 16,
+              right: 48,
+              zIndex: theme.zIndex.drawer + 1,
+            }}
+          >
+            <Download sx={{ color: "text.primary" }} />
+          </IconButton>
+          <IconButton
+            onClick={handleDrawerToggle}
+            sx={{
+              position: "fixed",
+              top: 16,
+              right: 16,
+              zIndex: theme.zIndex.drawer + 1,
+            }}
+          >
+            <Info sx={{ color: "text.primary" }} />
+          </IconButton>
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{ keepMounted: false }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                background: "linear-gradient(180deg, #333333 0%, #000000 100%)",
+
+                boxSizing: "border-box",
+                width: 240,
+                height: "100vh",
+              },
+            }}
+          >
+            <Sidebar />
+          </Drawer>
+        </>
+      ) : (
+        <Grid size={4}>
           <Sidebar />
-        )}
+        </Grid>
+      )}
+      <Grid size={isMobile ? 12 : 8}>
         <MainContent generatePDF={handleGeneratePDF} isMobile={isMobile} />
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   );
 }

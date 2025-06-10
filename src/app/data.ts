@@ -30,6 +30,18 @@ const data = {
       ],
     },
     {
+      name: "Amastay AI",
+      location: "San Francisco, CA",
+      link: "https://demo.amastay.ai",
+      position: "Senior Full-Stack Engineer (remote)",
+      startDate: "2025",
+      endDate: "2025",
+      highlights: [
+        "Developed high-level web app prototype of how an AI agent could manage short term rental properties",
+        "Built a NextJS admin dashboard for property and guest management",
+      ],
+    },
+    {
       name: "Ridecell",
       location: "San Francisco, CA",
       link: "https://www.ridecell.com",
@@ -53,7 +65,18 @@ const data = {
         "HIPAA/FERPA-compliant practices",
         "Interfaced web-based applications with Tableau/Denodo for complex data analysis and retrieval",
       ],
-    }
+    },
+    {
+      name: "Grand Valley State University",
+      location: "Allendale, MI",
+      link: "https://www.gvsu.edu",
+      position: "Server Support Technician",
+      startDate: "2010",
+      endDate: "2015",
+      highlights: [
+        "Provisioned every HP Proliant server that was installed in dual data centers",
+      ],
+    },
   ],
 
   education: [

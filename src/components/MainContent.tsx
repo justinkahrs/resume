@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -23,44 +23,41 @@ export default function MainContent({
   isMobile: boolean;
 }) {
   return (
-    <Box
+    <Grid
       component="main"
       sx={{
-        flexGrow: 1,
         bgcolor: "background.default",
         color: "text.primary",
         p: { xs: 2, sm: 4 },
       }}
     >
-      <Box sx={{ mb: 3 }}>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography
-            variant="h3"
-            sx={{
-              fontWeight: "bold",
-              display: "inline",
-              color: "text.primary",
-              mr: 1,
-            }}
-          >
-            {data.basics.firstName}
-          </Typography>
-          <Typography
-            variant="h3"
-            sx={{ display: "inline", color: "text.primary" }}
-          >
-            {data.basics.lastName}
-          </Typography>
-        </Box>
+      <Grid sx={{ display: "flex", alignItems: "center" }}>
         <Typography
-          variant="subtitle1"
-          sx={{ mt: 1, color: "text.secondary", letterSpacing: 1 }}
+          variant="h3"
+          sx={{
+            fontWeight: "bold",
+            display: "inline",
+            color: "text.primary",
+            mr: 1,
+          }}
         >
-          {data.basics.label}
+          {data.basics.firstName}
         </Typography>
-      </Box>
+        <Typography
+          variant="h3"
+          sx={{ display: "inline", color: "text.primary" }}
+        >
+          {data.basics.lastName}
+        </Typography>
+      </Grid>
+      <Typography
+        variant="subtitle1"
+        sx={{ mt: 1, color: "text.secondary", letterSpacing: 1 }}
+      >
+        {data.basics.label}
+      </Typography>
       {!isMobile && (
-        <Box
+        <Grid
           sx={{
             display: "flex",
             justifyContent: "flex-start",
@@ -76,11 +73,10 @@ export default function MainContent({
           >
             Save (PDF)
           </Button>
-        </Box>
+        </Grid>
       )}
       <Divider sx={{ mb: 3 }} />
-      {/* PROFILE */}
-      <Box sx={{ mb: 4 }}>
+      <Grid data-html2canvas-ignore="true" sx={{ mb: 4 }}>
         <Typography
           variant="h6"
           sx={{
@@ -95,7 +91,7 @@ export default function MainContent({
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {data.basics.summary}
         </Typography>
-      </Box>
+      </Grid>
       {/* WORK EXPERIENCE */}
       <Typography
         variant="h6"
@@ -132,8 +128,8 @@ export default function MainContent({
                 {!isLast && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
-                <Box sx={{ mb: isLast ? 0 : 4 }}>
-                  <Box
+                <Grid sx={{ mb: isLast ? 0 : 4 }}>
+                  <Grid
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -162,7 +158,7 @@ export default function MainContent({
                     >
                       {job.startDate} — {job.endDate}
                     </Typography>
-                  </Box>
+                  </Grid>
 
                   <Typography
                     variant="body2"
@@ -183,11 +179,16 @@ export default function MainContent({
                   )}
                   <List dense disablePadding>
                     {job.highlights.map((h) => (
-                      <ListItem key={h} disableGutters sx={{ pl: 0 }}>
+                      <ListItem
+                        key={h}
+                        disablePadding
+                        disableGutters
+                        sx={{ p: 0, m: 0 }}
+                      >
                         <ListItemIcon
                           sx={{ minWidth: 24, color: "primary.main" }}
                         >
-                          <Box
+                          <Grid
                             component="span"
                             sx={{
                               width: 6,
@@ -197,24 +198,16 @@ export default function MainContent({
                             }}
                           />
                         </ListItemIcon>
-                        <ListItemText
-                          primary={h}
-                          primaryTypographyProps={{
-                            variant: "body2",
-                            color: "text.secondary",
-                          }}
-                        />
+                        <ListItemText primary={h} sx={{ m: 0.25 }} />
                       </ListItem>
                     ))}
                   </List>
-                </Box>
+                </Grid>
               </TimelineContent>
             </TimelineItem>
           );
         })}
       </Timeline>
-
-      <Divider sx={{ mb: 4 }} />
-    </Box>
+    </Grid>
   );
 }
