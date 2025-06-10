@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef } from "react";
-import generatePDF from "react-to-pdf";
+import React, { useState, useRef, useEffect } from "react";
+import generatePDF, { Resolution } from "react-to-pdf";
 import Grid from "@mui/material/Grid";
 import Sidebar from "../components/Sidebar";
 import MainContent from "../components/MainContent";
@@ -17,11 +17,30 @@ export default function Home() {
     defaultMatches: true,
   });
   const pdfRef = useRef(null);
+  const [downloading, setDownloading] = useState(false);
+  useEffect(() => {
+    if (downloading) {
+      generatePDF(pdfRef, {
+        filename: "Justin_Kahrs_Resume.pdf",
+        resolution: Resolution.HIGH,
+        page: {
+          format: "letter",
+        },
+        overrides: {
+          pdf: {
+            compress: true,
+            format: "letter",
+          },
+        },
+      });
+      setDownloading(false);
+    }
+  }, [downloading]);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const handleGeneratePDF = () => {
-    generatePDF(pdfRef, { filename: "Justin_Kahrs_Resume.pdf" });
+    setDownloading(true);
   };
   return (
     <Grid
@@ -30,14 +49,15 @@ export default function Home() {
       ref={pdfRef}
       sx={{
         background: "linear-gradient(180deg, #333333 0%, #000000 100%)",
-        width: "100%",
-        maxWidth: "816px",
+        width: downloading ? "8.5in" : "100%",
+        maxWidth: downloading ? undefined : "816px",
         margin: "auto",
       }}
     >
       {isMobile ? (
         <>
           <IconButton
+            data-html2canvas-ignore="true"
             onClick={handleGeneratePDF}
             sx={{
               position: "fixed",
@@ -49,6 +69,7 @@ export default function Home() {
             <Download sx={{ color: "text.primary" }} />
           </IconButton>
           <IconButton
+            data-html2canvas-ignore="true"
             onClick={handleDrawerToggle}
             sx={{
               position: "fixed",
@@ -68,10 +89,8 @@ export default function Home() {
               display: { xs: "block", sm: "none" },
               "& .MuiDrawer-paper": {
                 background: "linear-gradient(180deg, #333333 0%, #000000 100%)",
-
                 boxSizing: "border-box",
                 width: 240,
-                height: "100vh",
               },
             }}
           >
@@ -84,7 +103,11 @@ export default function Home() {
         </Grid>
       )}
       <Grid size={isMobile ? 12 : 8}>
-        <MainContent generatePDF={handleGeneratePDF} isMobile={isMobile} />
+        <MainContent
+          downloading={downloading}
+          generatePDF={handleGeneratePDF}
+          isMobile={isMobile}
+        />
       </Grid>
     </Grid>
   );
