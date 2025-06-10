@@ -52,6 +52,7 @@ export default function Home() {
         width: downloading ? "8.5in" : "100%",
         maxWidth: downloading ? undefined : "816px",
         margin: "auto",
+        height: downloading ? "22in" : undefined,
       }}
     >
       {isMobile ? (
@@ -109,6 +110,18 @@ export default function Home() {
           isMobile={isMobile}
         />
       </Grid>
+      {downloading && (
+        <Grid
+          container
+          display="flex"
+          alignContent="center"
+          justifyContent="center"
+          size={12}
+          sx={{ color: "white", minHeight: "250px" }}
+        >
+          References available upon request
+        </Grid>
+      )}
     </Grid>
   );
 }
